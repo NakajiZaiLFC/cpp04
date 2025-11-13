@@ -6,9 +6,11 @@ public:
     Animal();
     Animal(const Animal& other);
     Animal& operator=(const Animal& other);
-    ~Animal();
+    virtual ~Animal();
+
+	std::string getType(void) const;
+	virtual void makeSound(void) const;
 
 protected:
 	std::string type;
 };
-
