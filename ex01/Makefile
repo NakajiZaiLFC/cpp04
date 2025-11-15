@@ -31,14 +31,12 @@ clean:
 	rm -rf $(OBJDIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(WRONG_NAME)
 
 wrong: $(WRONG_NAME)
 
 $(WRONG_NAME): $(WRONG_OBJ)
 	$(CXX) $(CXXFLAGS) $(WRONG_OBJ) -o $(WRONG_NAME)
-
-$(WRONG_NAME): 
 
 re: fclean all
 
@@ -46,4 +44,4 @@ run:re
 	clear
 	valgrind --leak-check=full --show-leak-kinds=all -q ./$(NAME)
 
-.PHONY: re clean fclean all run
+.PHONY: re clean fclean all run wrong

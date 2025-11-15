@@ -2,45 +2,31 @@
 #include "WrongCat.hpp"
 #include <iostream>
 
+#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
+#include <iostream>
+
 int main()
 {
-    std::cout << "========== WrongAnimal/WrongCat Test (Static Binding) ==========" << std::endl;
+    std::cout << "========== Virtual Destructor Verification ==========" << std::endl;
+    const int arraySize = 4;
+    WrongAnimal* animals[arraySize];
 
-    // 1. 基底クラスのポインタで基底クラスのオブジェクトを指す（通常）
-    std::cout << "\n[1] Creating WrongAnimal* meta = new WrongAnimal()" << std::endl;
-    const WrongAnimal* meta = new WrongAnimal();
-    std::cout << "-> Type: " << meta->getType() << " " << std::endl;
-    std::cout << "-> Sound: ";
-    meta->makeSound(); // WrongAnimal のサウンド
+    std::cout << "\n[1] Creating Dogs and Cats..." << std::endl;
+    for (int i = 0; i < arraySize / 2; i++) {
+        animals[i] = new WrongCat();
+    }
+    for (int i = arraySize / 2; i < arraySize; i++) {
+        animals[i] = new WrongCat();
+    }
 
-    // 2. 基底クラスのポインタで派生クラスのオブジェクトを指す
-    std::cout << "\n[2] Creating WrongAnimal* i = new WrongCat()" << std::endl;
-    const WrongAnimal* i = new WrongCat();
-    
-    // getType() は正しく WrongCat のものを呼び出す（virtual でなくても）
-    // ...もし getType() も virtual にしていなければ、これも WrongAnimal になる
-    // ここでは getType() は virtual だったと仮定して進めます。
-    std::cout << "-> Type: " << i->getType() << " " << std::endl; 
-
-    // 3. makeSound() の呼び出し
-    std::cout << "-> Sound (EXPECTING WrongAnimal's sound): ";
-    
-    // ★ ここがポイント ★
-    // i は WrongAnimal* 型なので、makeSound() が virtual でない場合、
-    // コンパイラは WrongAnimal::makeSound() を呼び出します。
-    i->makeSound(); // 
-
-    // 4. 比較用: 派生クラスのポインタで派生クラスのオブジェクトを指す
-    std::cout << "\n[3] Creating WrongCat* j = new WrongCat() (for comparison)" << std::endl;
-    const WrongCat* j = new WrongCat();
-    std::cout << "-> Type: " << j->getType() << " " << std::endl;
-    std::cout << "-> Sound (EXPECTING WrongCat's sound): ";
-    j->makeSound(); // これは j が WrongCat* 型なので、WrongCat のサウンドが呼ばれる
-
-    std::cout << "\n========== Cleanup ==========" << std::endl;
-    delete meta;
-    delete i;
-    delete j;
-
+    std::cout << "\n[2] Deleting objects via Animal* pointers..." << std::endl;
+    for (int i = 0; i < arraySize; i++) {
+        std::cout << "--- Deleting index " << i << " ---" << std::endl;
+        delete animals[i];
+    }
+    std::cout << "========== End of Test ==========" << std::endl;
     return 0;
 }
+
