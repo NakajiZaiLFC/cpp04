@@ -6,7 +6,9 @@ FILE := main.cpp \
 		Character.cpp \
 		Ice.cpp \
 		Cure.cpp \
-		MateriaSource.cpp
+		MateriaSource.cpp \
+		ICharacter.cpp \
+		IMateriaSource.cpp
 
 OBJDIR := obj
 

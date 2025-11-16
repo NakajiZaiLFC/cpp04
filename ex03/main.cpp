@@ -8,8 +8,15 @@
 int main()
 {
 	IMateriaSource* src = new MateriaSource();
-	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
+	// src->learnMateria(new Ice());
+	// src->learnMateria(new Cure());
+	AMateria* tmpIce = new Ice();
+	src->learnMateria(tmpIce); // clone() して学習させる
+	delete tmpIce;             // 原本は main が delete する
+
+	AMateria* tmpCure = new Cure();
+	src->learnMateria(tmpCure); // clone() して学習させる
+	delete tmpCure;            // 原本は main が delete する
 	ICharacter* me = new Character("me");
 	AMateria* tmp;
 	tmp = src->createMateria("ice");
@@ -22,6 +29,5 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-
 	return 0;
 }

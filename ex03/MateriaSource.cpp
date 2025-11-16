@@ -1,10 +1,12 @@
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource() {
-    
+    for (int i = 0; i < 4; i++) {
+        this->m_templates[i] = NULL;
+    }
 }
 
-MateriaSource::MateriaSource(const MateriaSource& other) {
+MateriaSource::MateriaSource(const MateriaSource& other) : IMateriaSource(other) {
     *this = other;
 }
 

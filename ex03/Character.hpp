@@ -7,7 +7,7 @@ public:
     Character();
     Character(const Character& other);
     Character& operator=(const Character& other);
-    ~Character();
+    virtual ~Character();
 
 	Character(const std::string& name);
 	virtual std::string const & getName() const;

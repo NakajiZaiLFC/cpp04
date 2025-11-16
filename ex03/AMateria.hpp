@@ -9,13 +9,15 @@ public:
     AMateria(const AMateria& other);
     AMateria& operator=(const AMateria& other);
     virtual ~AMateria();
+
+	AMateria(const std::string& type);
 	virtual AMateria* clone(void) const = 0;
 	std::string const & getType() const;
 	virtual void use(ICharacter& target) = 0;
 
 
 protected:
-	std::string type;
+	std::string m_type;
     
 };
 

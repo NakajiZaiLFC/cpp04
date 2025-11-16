@@ -41,7 +41,10 @@ Character& Character::operator=(const Character& other){
 }
 
 Character::~Character() {
-    
+    for (int i = 0; i < 4; i++) {
+        if (this->m_slots[i])
+            delete this->m_slots[i];
+    }
 }
 
 std::string const& Character::getName() const{

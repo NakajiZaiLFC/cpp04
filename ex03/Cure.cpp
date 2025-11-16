@@ -1,18 +1,18 @@
 #include "Cure.hpp"
 #include <iostream>
 
-Cure::Cure() {
+Cure::Cure() : AMateria("cure") {
     
 }
 
-Cure::Cure(const Cure& other) {
-    *this = other;
+Cure::Cure(const Cure& other) : AMateria(other){
 }
 
 Cure& Cure::operator=(const Cure& other) {
     if (this != &other) {
+		this->m_type = other.m_type;
     }
-    return *this;
+	return *this;
 }
 
 Cure::~Cure() {
